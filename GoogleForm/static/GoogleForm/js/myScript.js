@@ -5,15 +5,9 @@ var myScript = (function () {
     };
 
     el = {
-        questionTitleContainers : myDom.getElsByClass('questionTitle'),
-        questionTypeContainer : myDom.getElByClass('questionType'),
-        dropdownFieldContainer : myDom.getElByClass('quesDropdown'),
-        addQuestionBtn : myDom.getElById('addQuestion'),
         shortTypeQues : myDom.getElById('short'),
         singleTypeQues : myDom.getElById('single'),
         multipleTypeQues : myDom.getElById('multiple'),
-        submitBtn : myDom.getElById('submitButton'),
-        addFormBtn : myDom.getElById('addForm'),
         quesCount : myDom.getElById('quesCount').val(),
         formContainer : myDom.getElById('formContainer')
     };
@@ -23,9 +17,6 @@ var myScript = (function () {
         _getShortQuestionOptionMarkup : function (event) {
             el.quesCount++;
             myDom.getElById('quesCount').val(el.quesCount);
-            //myDom.getElById('quesType').val('SH_'+ el.quesCount);
-            //console.log(event.target.id);
-            //var formContainer = myDom.getElById('formContainer');
             var shortQuesMarkup = $('<div class="row">' +
                     '<div class="col-sm-12">' +
                         '<div class="row">' +
@@ -58,9 +49,6 @@ var myScript = (function () {
         _getSingleQuestionOptionMarkup : function (event) {
             el.quesCount++;
             myDom.getElById('quesCount').val(el.quesCount);
-            //myDom.getElById('quesType').val('SC_'+ el.quesCount);
-            //console.log(event.target.id);
-            //var formContainer = myDom.getElById('formContainer');
             var singleQuesMarkup = $('<div class="row">' +
                     '<div class="col-sm-12">' +
                         '<div class="row">' +
@@ -102,9 +90,6 @@ var myScript = (function () {
         _getMultipleQuestionOptionMarkup : function (event) {
             el.quesCount++;
             myDom.getElById('quesCount').val(el.quesCount);
-            //myDom.getElById('quesType').val('MC_'+ el.quesCount);
-            //console.log(event.target.id);
-            //var formContainer = myDom.getElById('formContainer');
             var multipleChoice = $('<div class="row">'+
                     '<div class="col-sm-12 questionBlock">'+
                         '<div class="row">'+
