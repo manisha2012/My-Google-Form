@@ -1,0 +1,43 @@
+{% extends 'GoogleForm/base.html' %}
+
+{% block content %}
+
+    <div class="page-header base-header text-center">
+        <h1 class="base-heading">Google Forms</h1>
+    </div>
+
+    <div class="content container">
+        <div class="row">
+            <div class="col-md-10"></div>
+            <div class="col-md-2 text-right">
+                <a href="/GoogleForm/createForm/" class="btn btn-primary" type="button" id="addForm" data-toggle="tooltip" title="Add Form" data-placement="bottom"><i class="material-icons">library_add</i></a href="/GoogleForm/createForm/">
+            </div>
+        </div>
+        {% if form_list %}
+            <div class="row">
+                <div class="col-md-10">
+                    <div class="mdl-grid">
+                    {% for forms in form_list %}
+                        <div class="mdl-cell mdl-cell--6-col">
+                            <div class="demo-card-wide mdl-card mdl-shadow--2dp">
+                                <div class="mdl-card__title">
+                                    <h2 class="mdl-card__title-text">{{ forms.form_title }}</h2>
+                                </div>
+                                <div class="mdl-card__supporting-text">{{ forms.form_description }}</div>
+                                <div class="mdl-card__actions mdl-card--border">
+                                    <a class="mdl-button mdl-button--colored mdl-js-button mdl-js-ripple-effect" href="/GoogleForm/{{ forms.id }}/">
+                                        Open
+                                    </a>
+                                </div>
+                            </div>
+                        </div>
+                    {% endfor %}
+                    </div>
+        {% else %}
+                <p>No forms are available.</p>
+        {% endif %}
+                </div>
+            </div>
+    </div>
+{% endblock %}
+

@@ -1,0 +1,151 @@
+{% extends 'GoogleForm/base.html' %}
+
+{% block content %}
+    <div class="page-header form-header text-center">
+        <h1>Google Form</h1>
+    </div>
+    <form id="main" method="POST" action="{% if form %}/GoogleForm/updateForm/{{ form.id }}/{% else %}/GoogleForm/saveForm/{% endif %}">{% csrf_token %}
+        <div class="row">
+            <div class="col-sm-2 left-panel"></div>
+            <div class="col-sm-8 mid-panel"  id="formContainer">
+                <div class="row">
+                    <div class="col-sm-12 formTitle">
+                        <div class="mdl-textfield mdl-js-textfield">
+                            <input class="mdl-textfield__input" type="text" id="title" name="form_title" value="{% if form %}{{ form.form_title }}{% endif %}">
+                            <label class="mdl-textfield__label" for="title">Give title to your form...</label>
+                        </div>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-sm-12 formDes">
+                        <div class="mdl-textfield mdl-js-textfield">
+                            <input class="mdl-textfield__input" type="text" id="description" name="form_description" value="{% if form %}{{ form.form_description }}{% endif %}">
+                            <label class="mdl-textfield__label" for="title">Form Description...</label>
+                        </div>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-sm-12 formDes">
+                        <div class="mdl-textfield mdl-js-textfield">
+                            <input class="mdl-textfield__input" type="hidden" id="quesCount" name="ques_count" value="{% if form %}{{ form.total_ques }}{% else %}0{% endif %}">
+                        </div>
+                    </div>
+                </div>
+                {% if ques_list %}
+                    {% for ques in ques_list %}
+                        <div class="row">
+                            <div class="col-sm-12">
+                                <div class="mdl-textfield mdl-js-textfield">
+                                    <input class="mdl-textfield__input" type="hidden" name="ques{{ forloop.counter }}" value="{{ ques.id }}">
+                                </div>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-sm-12">
+                                <div class="mdl-textfield mdl-js-textfield">
+                                    <input class="mdl-textfield__input" type="text" name="ques_title{{ forloop.counter }}" value="{{ ques.ques_title }}">
+                                    <label class="mdl-textfield__label">Give title to your question...</label>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-sm-12">
+                                <div class="mdl-textfield mdl-js-textfield">
+                                    <input class="mdl-textfield__input" type="hidden" name="ques_type{{ forloop.counter }}" value="{{ ques.ques_type }}">
+                                </div>
+                            </div>
+                        </div>
+                        {% if ques.ques_type == 'SH' %}
+                            <div class="row">
+                                <div class="col-sm-12">
+                                    <div class="mdl-textfield mdl-js-textfield">
+                                        <input class="mdl-textfield__input" type="text" disabled>
+                                        <label class="mdl-textfield__label">Write answer here..</label>
+                                    </div>
+                                </div>
+                            </div>
+                        {% endif %}
+                        {% if ques.ques_type == 'SC' %}
+                            {% for opts in options.single_options %}
+                                {% if opts.0 == ques.id %}
+                                    {% for option in opts.1 %}
+                                        <div class="row">
+                                            <div class="col-sm-12">
+                                                <div class="mdl-textfield mdl-js-textfield">
+                                                    <input class="mdl-textfield__input" type="hidden" name="optionSC{{ forloop.parentloop.parentloop.counter }}{{ forloop.counter }}" value="{{ option.id }}">
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="row">
+                                            <div class="col-sm-1 optionBox"><span class="glyphicon glyphicon-unchecked"></span></div>
+                                            <div class="col-sm-5">
+                                                <div class="mdl-textfield mdl-js-textfield">
+                                                    <input class="mdl-textfield__input" type="text" name="option_single_{{ forloop.parentloop.parentloop.counter }}_{{ forloop.counter }}" value="{{ option }}">
+                                                    <label class="mdl-textfield__label">Option 1</label>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    {% endfor %}
+                                {% endif %}
+                            {% endfor %}
+                        {% endif %}
+                        {% if ques.ques_type == 'MC' %}
+                            {% for opts in options.multiple_options %}
+                                {% if opts.0 == ques.id %}
+                                    {% for option in opts.1 %}
+                                        <div class="row">
+                                            <div class="col-sm-12">
+                                                <div class="mdl-textfield mdl-js-textfield">
+                                                    <input class="mdl-textfield__input" type="hidden" name="optionMC{{ forloop.parentloop.parentloop.counter }}{{ forloop.counter }}" value="{{ option.id }}">
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="row">
+                                            <div class="col-sm-1 optionBox"><span class="glyphicon glyphicon-record"></span></div>
+                                            <div class="col-sm-5">
+                                                <div class="mdl-textfield mdl-js-textfield">
+                                                    <input class="mdl-textfield__input" type="text" name="option_mul_{{ forloop.parentloop.parentloop.counter }}_{{ forloop.counter }}" value="{{ option }}">
+                                                    <label class="mdl-textfield__label">Option 1</label>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    {% endfor %}
+                                {% endif %}
+                            {% endfor %}
+                        {% endif %}
+                    {% endfor %}
+                {% endif %}
+            </div>
+            <div class="col-sm-2 right-panel">
+                <div class="row">
+                    <div class="col-sm-2"></div>
+                    <div class="col-sm-4 rightBar">
+                        <div class="dropdown">
+                            <button class="btn btn-primary dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Add Question</button>
+                            <ul class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+                                <li><a class="dropdown-item" href="#" id="short">Short Answer</a></li>
+                                <li><a class="dropdown-item" href="#" id="single">Single Choice</a></li>
+                                <li><a class="dropdown-item" href="#" id="multiple">Multiple Choice</a></li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+                {% if form %}
+                    <div class="row">
+                        <div class="col-sm-2"></div>
+                        <div class="col-sm-4 rightBar">
+                            <input class="btn btn-primary" type="submit" id="updateButton">
+                        </div>
+                    </div>
+                {% else %}
+                    <div class="row">
+                        <div class="col-sm-2"></div>
+                        <div class="col-sm-4 rightBar">
+                            <input class="btn btn-primary" type="submit" id="submitButton">
+                        </div>
+                    </div>
+                {% endif %}
+            </div>
+        </div>
+    </form>
+   {% endblock %}

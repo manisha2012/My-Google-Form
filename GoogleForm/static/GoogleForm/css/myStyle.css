@@ -1,0 +1,28 @@
+.base-header{
+    background-color: black;
+    margin-top: -30px;
+}
+
+.base-heading{
+    padding-top: 30px;
+    color: white;
+    font-family: "Lucida Grande", "DejaVu Sans", "Bitstream Vera Sans", Verdana, Arial, sans-serif;
+}
+
+.demo-card-wide.mdl-card {
+  width: 350px;
+}
+.demo-card-wide > .mdl-card__title {
+  color: #fff;
+  height: 176px;
+    background: url('images/form-img.jpg') center / cover;
+
+}
+.demo-card-wide > .mdl-card__menu {
+  color: #fff;
+}
+
+.index-card{
+    padding:2em;
+}
+
