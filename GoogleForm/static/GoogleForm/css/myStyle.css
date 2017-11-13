@@ -9,6 +9,11 @@
     font-family: "Lucida Grande", "DejaVu Sans", "Bitstream Vera Sans", Verdana, Arial, sans-serif;
 }
 
+.form-header{
+    background-color: #7414BE;
+    margin-top: -30px;
+}
+
 .demo-card-wide.mdl-card {
   width: 350px;
 }
@@ -22,7 +27,20 @@
   color: #fff;
 }
 
-.index-card{
-    padding:2em;
+.form-container{
+    margin-top: -30px;
+    background-color: #EFE6F7;
+    min-height: 100vh;
 }
+
+.mid-panel{
+    background-color: white;
+    margin-top: -20px;
+}
+
+.rightBar{
+    margin-top: 20px;
+}
+
+
 
