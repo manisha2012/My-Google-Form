@@ -1,10 +1,25 @@
 {% extends 'GoogleForm/base.html' %}
 
 {% block content %}
+    <nav class="navbar navbar-inverse">
+      <div class="container-fluid">
+        <div class="navbar-header">
+          <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#myNavbar">
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+          </button>
+          <a class="navbar-brand" href="#">Google Forms</a>
+        </div>
+        <div class="collapse navbar-collapse" id="myNavbar">
 
-    <div class="page-header base-header text-center">
-        <h1 class="base-heading">Google Forms</h1>
-    </div>
+          <ul class="nav navbar-nav navbar-right">
+            <li><a href="#"><span class="glyphicon glyphicon-user"></span>{{ user }}</a></li>
+            <li><a href="/GoogleForm/logout/"><span class="glyphicon glyphicon-log-out"></span> Logout</a></li>
+          </ul>
+        </div>
+      </div>
+    </nav>
 
     <div class="content container">
         <div class="row">
@@ -40,4 +55,3 @@
             </div>
     </div>
 {% endblock %}
-
