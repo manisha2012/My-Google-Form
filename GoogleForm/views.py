@@ -144,4 +144,3 @@ def updateForm(request, form_id):
         form_list = Form.objects.all()
         context = {'form_list': form_list}
         return render(request, 'GoogleForm/index.html', context)
-    # Create your views here.
