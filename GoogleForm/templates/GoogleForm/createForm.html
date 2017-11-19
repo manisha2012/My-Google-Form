@@ -2,12 +2,12 @@
 
 {% block content %}
     <div class="page-header form-header text-center">
-        <h1>Google Form</h1>
+        <h1>.</h1>
     </div>
-    <form id="main" method="POST" action="{% if form %}/GoogleForm/updateForm/{{ form.id }}/{% else %}/GoogleForm/saveForm/{% endif %}">{% csrf_token %}
+    <form id="main" class="form-container" method="POST" action="{% if form %}/GoogleForm/updateForm/{{ form.id }}/{% else %}/GoogleForm/saveForm/{% endif %}">{% csrf_token %}
         <div class="row">
-            <div class="col-sm-2 left-panel"></div>
-            <div class="col-sm-8 mid-panel"  id="formContainer">
+            <div class="col-sm-3 left-panel"></div>
+            <div class="col-sm-6 mid-panel"  id="formContainer">
                 <div class="row">
                     <div class="col-sm-12 formTitle">
                         <div class="mdl-textfield mdl-js-textfield">
@@ -116,7 +116,7 @@
                     {% endfor %}
                 {% endif %}
             </div>
-            <div class="col-sm-2 right-panel">
+            <div class="col-sm-3 right-panel">
                 <div class="row">
                     <div class="col-sm-2"></div>
                     <div class="col-sm-4 rightBar">

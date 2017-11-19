@@ -1,17 +1,42 @@
 # -*- coding: utf-8 -*-
 from __future__ import unicode_literals
-
-from django.shortcuts import render
-
+from django.http import HttpResponseRedirect
+from django.shortcuts import render, render_to_response
 from .models import Form, Question, Option
-
+from django.contrib.auth import login, authenticate
+from django.contrib.auth.forms import UserCreationForm
+from django.template import RequestContext
+from django.contrib.auth.decorators import login_required
 from django.http import HttpResponse
 
+def signup(request):
+    if request.method == 'POST':
+        form = UserCreationForm(request.POST)
+        if form.is_valid():
+            form.save()
+            username = form.cleaned_data.get('username')
+            raw_password = form.cleaned_data.get('password1')
+            user = authenticate(username=username, password=raw_password)
+            login(request, user)
+            return HttpResponseRedirect("/GoogleForm/login")
+            #return render_to_response('registration/login.html', RequestContext(request, {}))
+            #return render(RequestContext(request), 'registration/login.html')
+            #return render(request, 'registration/login.html')
+    else:
+        form = UserCreationForm()
+    return render(request, 'registration/signup.html', {'form': form})
+
+@login_required
 def index(request):
+    #if request.user.is_authenticated():
     form_list = Form.objects.all()
-    context = {'form_list': form_list}
+    #user = User.objects.get(pk=request.user)
+    #form_list = user.Form_set.all()
+    context = {'form_list': form_list, 'user': request.user}
     return render(request, 'GoogleForm/index.html', context)
 
+
+@login_required
 def formDetail(request, form_id):
     form = Form.objects.get(pk=form_id)
     ques_list = form.question_set.all().order_by('created_at')
@@ -33,6 +58,7 @@ def formDetail(request, form_id):
     context = {'form': form, 'ques_list': ques_list, 'options': options}
     return render(request, 'GoogleForm/createForm.html', context)
 
+@login_required
 def createForm(request):
     return render(request, 'GoogleForm/createForm.html')
 

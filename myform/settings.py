@@ -50,6 +50,10 @@ MIDDLEWARE = [
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
 ]
 
+CONTEXT_PROCESSORS = [
+    'django.core.context_processors.csrf',
+]
+
 ROOT_URLCONF = 'myform.urls'
 
 TEMPLATES = [
@@ -125,3 +129,8 @@ STATICFILES_DIRS = (
 # https://docs.djangoproject.com/en/1.11/howto/static-files/
 
 STATIC_URL = '/static/'
+
+LOGIN_URL = 'login'
+
+LOGIN_REDIRECT_URL = 'index'
+

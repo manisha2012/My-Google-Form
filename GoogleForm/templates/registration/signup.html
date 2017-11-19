@@ -1,0 +1,60 @@
+{% extends '../GoogleForm/base.html' %}
+
+{% block content %}
+<div class="login-page">
+  <div class="container p-none">
+    <div class="row">
+        <h4 class="login-header text-center">Make your own Google forms</h4>
+    </div>
+    <div class="row login-form-row">
+        <div class="col-md-4"></div>
+        <div class="lgn-container col-md-4">
+            <div class="row">
+                <h4 class="text-center">Sign up</h4>
+            </div>
+            <div class="row text-center">
+                <form method="post">
+                    {% csrf_token %}
+                    <div>
+                        <i class="material-icons">perm_identity</i>
+                        <div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label">
+                            <input class="mdl-textfield__input" type="text" name="username" id="user">
+                            <label class="mdl-textfield__label" for="user">Username</label>
+                        </div>
+                    </div>
+                    <div>
+                        <i class="material-icons">lock</i>
+                        <div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label">
+                            <input class="mdl-textfield__input"  name="password1" type="password" id="pass">
+                            <label class="mdl-textfield__label" for="pass" >Password</label>
+                        </div>
+                    </div>
+                    <div>
+                        <i class="material-icons">lock</i>
+                        <div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label">
+                            <input class="mdl-textfield__input"  name="password2" type="password" id="pass2">
+                            <label class="mdl-textfield__label" for="pass2" >Re-enter Password</label>
+                        </div>
+                    </div>
+                    <button class="mdl-button mdl-js-button mdl-button--raised mdl-js-ripple-effect mdl-button--accent" type="submit">Sign up</button>
+                    {% if form.errors %}
+                        <div class="mdl-js-snackbar mdl-snackbar">
+                            <div class="mdl-snackbar__text">
+                                <p class="">{{ form.errors }}</p>
+                            </div>
+                            <button class="mdl-snackbar__action" type="button"></button>
+                        </div>
+                    {% endif %}
+                  </form>
+            </div>
+            <div class="row text-center not-reg">
+                <p>Already have an account? <a href="/GoogleForm/login/">Login here</a></p>
+            </div>
+        </div>
+
+    </div>
+
+  </div>
+</div>
+
+{% endblock %}

@@ -1,0 +1,61 @@
+{% extends '../GoogleForm/base.html' %}
+
+{% block title %}Login{% endblock %}
+
+{% block content %}
+<div class="login-page">
+  <div id="content-container" class="container p-none">
+    <div class="row">
+        <h4 class="login-header text-center">Make your own Google forms</h4>
+    </div>
+    <div class="row login-form-row">
+        <div class="col-md-4"></div>
+        <div class="lgn-container col-md-4">
+            <div class="row">
+                <h4 class="text-center">Login</h4>
+            </div>
+            <div class="row text-center">
+                <form id="login-form" method="post">
+                    {% csrf_token %}
+                    <div>
+                        <i class="material-icons">perm_identity</i>
+                        <div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label">
+                            <input class="mdl-textfield__input" type="text" name="username" id="sample3">
+                            <label class="mdl-textfield__label" for="sample3">Enter your name...</label>
+                        </div>
+                    </div>
+                    <div>
+                        <i class="material-icons">lock</i>
+                        <div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label">
+                            <input class="mdl-textfield__input"  name="password" type="password" id="sample">
+                            <label class="mdl-textfield__label" for="sample" >Enter password...</label>
+                        </div>
+                    </div>
+                    <input type="submit" value="Login" class="mdl-button mdl-js-button mdl-button--raised mdl-js-ripple-effect mdl-button--accent" />
+                    <input type="hidden" name="next" value="{{ next }}" />
+                    {% if form.errors %}
+                        <div class="mdl-js-snackbar mdl-snackbar">
+                            <div class="mdl-snackbar__text">
+                                <p class="">{{ form.errors }}</p>
+                            </div>
+                            <button class="mdl-snackbar__action" type="button"></button>
+                        </div>
+                    {% endif %}
+
+                </form>
+            </div>
+            <div class="row text-center not-reg">
+                <p>If not registered, <a href="/GoogleForm/signup/">Register here</a></p>
+            </div>
+        </div>
+
+    </div>
+
+  </div>
+</div>
+
+
+{% endblock %}
+
+
+
